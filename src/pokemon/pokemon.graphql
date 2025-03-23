@@ -1,0 +1,59 @@
+type Pokemon{
+  id: Int
+  name: String
+  type: String
+  created_at: String
+}
+
+input CreatePokemon{
+  name: String!
+  type: String!
+}
+
+input UpdatePokemon{
+  id: Int!
+  name: String
+  type: String
+}
+
+type OkResponse {
+  ok: Boolean
+}
+
+input Filter {
+  id: Int
+  name: String
+  type: String
+}
+
+input Pagination {
+  limit: Int
+  offset: Int
+}
+
+input Sort {
+  field: Field
+  order: Order
+}
+
+enum Field {
+  id
+  name
+  type
+  created_at
+}
+enum Order {
+  asc
+  desc
+}
+
+type Query {
+  findManyPokemons(filter: Filter, pagination: Pagination, sort: Sort): [Pokemon]
+}
+
+type Mutation {
+  createPokemon(createPokemon: CreatePokemon!): Pokemon
+  updatePokemon(updatePokemon: UpdatePokemon!): Pokemon
+  deletePokemon(id: Int!): OkResponse
+  importPokemonById(id: Int!):Pokemon
+}
